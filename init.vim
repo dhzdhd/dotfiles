@@ -1,4 +1,5 @@
 " Install nodejs and npm before using this config file
+" source ~/.config/nvim/init.vim - add this to your shell config file
 
 " Plugins
 call plug#begin('~/.vim/plugged')
