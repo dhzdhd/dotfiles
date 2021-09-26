@@ -1,5 +1,5 @@
 " Install nodejs and npm before using this config file
-" source ~/.config/nvim/init.vim - add this to your shell config file (WSL only)
+" Make sure that neovim 0.5 is installed
 
 " Plugins
 call plug#begin('~/.vim/plugged')
