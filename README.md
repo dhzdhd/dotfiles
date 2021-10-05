@@ -4,6 +4,7 @@ A collection of necessary dotfiles for editors and other config files
 ## Usage
 * Initial
   * `sudo ... install zsh`
+  * `chsh -s $(which zsh)`
   * `sudo ... install neovim`
 
 * Neovim
