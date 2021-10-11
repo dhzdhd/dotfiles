@@ -82,6 +82,11 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
+" Set tab space to 4
+:set tabstop=4
+:set shiftwidth=4
+:set expandtab
+
 " Easy Escape
 " let g:easyescape_chars = { "j": 2 }
 " let g:easyescape_timeout = 100
