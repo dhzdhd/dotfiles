@@ -15,6 +15,11 @@ A collection of necessary dotfiles for editors and other config files
   * Copy and paste content into `init.vim`
   * Open neovim and type `:PlugInstall`
 
+* Helix
+  * `winget install helix`
+  * In the editor, type `:config-open`
+  * Paste contents of `config.toml` into the opened file and save 
+
 * Windows Terminal (Windows 11)
   * Open settings.json and make a new color scheme called `Nord`:
   
