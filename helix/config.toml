@@ -2,10 +2,13 @@ theme = "tokyonight_storm"
 
 [editor]
 shell = ["ps", "/C"]
+line-number = "relative"
 auto-save = true
 completion-replace = true
+completion-trigger-len = 1
 bufferline = "multiple"
 color-modes = true
+true-color = true
 
 [editor.statusline]
 left = ["mode", "spinner", "version-control"]
