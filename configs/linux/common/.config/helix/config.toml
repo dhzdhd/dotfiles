@@ -1,7 +1,7 @@
 theme = "tokyonight_storm"
 
 [editor]
-shell = ["ps", "/C"]
+shell = ["bash", "~"]
 line-number = "relative"
 auto-save = true
 completion-replace = true
