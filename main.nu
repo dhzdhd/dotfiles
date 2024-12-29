@@ -1,5 +1,5 @@
 #!/usr/bin/env nu
-use "scripts/linbasic.nu" setup-helix
+use "scripts/linbasic.nu" setup-editor
 
 def main [] {
     echo "

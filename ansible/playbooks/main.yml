@@ -1,0 +1,10 @@
+---
+- name: Main playbook
+  hosts: localgroup
+  vars_prompt:
+    - name: editor
+      prompt: Choose your editor - 1.Helix, 3.Neovim, 5.Emacs. Add numbers to get multiple
+  tasks:
+    - name: Import helix plays
+      ansible.builtin.import_playbook: ''
+      when: editor == 2
