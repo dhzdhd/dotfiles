@@ -1,9 +1,8 @@
 theme = "tokyonight_storm"
 
 [editor]
-shell = ["bash", "~"]
+shell = ["zsh", "~"]
 line-number = "relative"
-auto-save = true
 completion-replace = true
 completion-trigger-len = 1
 bufferline = "multiple"
@@ -13,11 +12,22 @@ true-color = true
 [editor.statusline]
 left = ["mode", "spinner", "version-control"]
 center = ["file-name", "file-modification-indicator"]
-right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending"]
+right = [
+    "diagnostics",
+    "selections",
+    "position",
+    "file-encoding",
+    "file-line-ending",
+]
 
 [editor.lsp]
 display-messages = true
 display-inlay-hints = true
+
+[editor.auto-save]
+focus-lost = true
+after-delay.enable = true
+after-delay.timeout = 3000
 
 [editor.cursor-shape]
 insert = "bar"
@@ -30,11 +40,28 @@ hidden = false
 render = true
 
 [keys.insert]
-i = { i = "normal_mode" }
+j = { k = "normal_mode" }
+C-s = ":w"
+
+[keys.normal]
+C-s = ":w"
+C-o = ":config-open"
+
+[keys.normal.l]
+g = [
+    ":write-all",
+    ":new",
+    ":insert-output lazygit",
+    ":set mouse false",
+    ":set mouse true",
+    ":buffer-close!",
+    ":redraw",
+    ":reload-all",
+]
 
 [keys.normal.g]
-f = ":run-shell-command git pull"
-p = ":run-shell-command git push"
-y = ":run-shell-command git pull; git push"
-s = ":run-shell-command git status"
-i = ":run-shell-command git init"
+f = ":sh git pull"
+p = ":sh git push"
+y = ":sh git pull; git push"
+s = ":sh git status"
+i = ":sh git init"

@@ -60,3 +60,7 @@ A collection of necessary dotfiles for editors and other config files
   * `ctrl B + shift I` to install plugins
   * Reload tmux environment `tmux source ~/.tmux.conf`
 
+## TODO
+
+- Complete Ansible config
+- Use https://github.com/microsoft/winget-dsc for winget state config instead of json files
