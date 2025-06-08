@@ -1,0 +1,6 @@
+---
+- name: Install Helix editor
+  ansible.builtin.package:
+    name: helix
+    state: present
+  when: "'helix' in editor.user_input"
