@@ -1,0 +1,33 @@
+name: Test dotfiles using Docker
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro:
+          - ubuntu:22.04
+          - fedora:42
+          - archlinux:latest
+    container: ${{ matrix.distro }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Run playbook
+        uses: dawidd6/action-ansible-playbook@v3
+        with:
+          playbook: main.yml
+          directory: ./ansible/playbooks
+          # requirements: galaxy-requirements.yml
+          options: |
+            --extra-vars DOTFILE_INSTALL_ALL=true
