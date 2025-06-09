@@ -12,64 +12,67 @@
         msg: Following are a set of questions to help you set up your environment. Select only the first letter from the option. Options can be combined.
 
   tasks:
-    - name: Select editor
-      ansible.builtin.pause:
-        prompt: |
-          Choose your editor:
-          1) helix - Helix
-          2) nvim - Neovim  
-          3) emacs - Emacs
-          4) intellij - IntelliJ IDEA
-          5) vscode - Visual Studio Code
-          6) astudio - Android Studio
-      register: editor
+    - name: Prompt user 
+      block: 
+        - name: Select editor
+          ansible.builtin.pause:
+            prompt: |
+              Choose your editor:
+              1) helix - Helix
+              2) nvim - Neovim  
+              3) emacs - Emacs
+              4) intellij - IntelliJ IDEA
+              5) vscode - Visual Studio Code
+              6) astudio - Android Studio
+          register: editor
 
-    - name: Select SDK
-      ansible.builtin.pause:
-        prompt: |
-          Choose your SDK:
-          1) java - Java (OpenJDK, Maven, Gradle, jdtls)
-          2) py - Python (Python 3, uv, pyrefly)
-          3) js - JavaScript (Node.js, Typescript)
-          4) rust - Rust (rustup, Cargo)
-          5) gleam - Gleam
-          6) go - Go
-          8) clj - Clojure
-          9) rkt - Racket
-          10) haskell - Haskell
-          11) dart - Dart (Flutter)
-          12) dotnet - C#/F# (.NET SDK)
-          13) ps - PureScript
-          14) julia - Julia
-          15) kotlin - Kotlin
-          16) dlang - D
-          17) php - PHP (Tomcat)
-          18) scala - Scala
-          19) elm - Elm
-          20) ocaml - OCaml
-          30) apl - APL 
-          31) zig - Zig
-          32) nim - Nim
-          33) crystal - Crystal
-          34) lua - Lua
-          35) raku - Raku
-          36) swift - Swift
-      register: sdk
+        - name: Select SDK
+          ansible.builtin.pause:
+            prompt: |
+              Choose your SDK:
+              1) java - Java (OpenJDK, Maven, Gradle, jdtls)
+              2) py - Python (Python 3, uv, pyrefly)
+              3) js - JavaScript (Node.js, Typescript)
+              4) rust - Rust (rustup, Cargo)
+              5) gleam - Gleam
+              6) go - Go
+              8) clj - Clojure
+              9) rkt - Racket
+              10) haskell - Haskell
+              11) dart - Dart (Flutter)
+              12) dotnet - C#/F# (.NET SDK)
+              13) ps - PureScript
+              14) julia - Julia
+              15) kotlin - Kotlin
+              16) dlang - D
+              17) php - PHP (Tomcat)
+              18) scala - Scala
+              19) elm - Elm
+              20) ocaml - OCaml
+              30) apl - APL 
+              31) zig - Zig
+              32) nim - Nim
+              33) crystal - Crystal
+              34) lua - Lua
+              35) raku - Raku
+              36) swift - Swift
+          register: sdk
 
-    - name: Select dev tools
-      ansible.builtin.pause:
-        prompt: |
-          Choose your development tools:
-          1) git - Git
-          2) docker - Docker
-          3) kubectl - Kubernetes CLI
-          4) helm - Helm
-          5) terraform - Terraform
-          6) pulumi - Pulumi
-      register: tools
+        - name: Select dev tools
+          ansible.builtin.pause:
+            prompt: |
+              Choose your development tools:
+              1) docker - Docker
+              2) kubectl - Kubernetes CLI
+              3) helm - Helm
+              4) terraform - Terraform
+              5) pulumi - Pulumi
+          register: tools
 
-    - name: Import tasks
-      ansible.builtin.include_tasks: "{{ item }}"
-      loop:
-        - "../tasks/editor.yml"
-        - "../tasks/sdk.yml"
+        - name: Start tasks
+          ansible.builtin.include_tasks: "{{ item }}"
+          loop:
+            - "../tasks/editor.yml"
+            - "../tasks/sdk.yml"
+      when: lookup('env', 'DOTFILE_INSTALL_ALL') | default('false') != 'true'
+      
