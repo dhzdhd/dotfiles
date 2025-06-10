@@ -13,6 +13,7 @@ jobs:
           - ubuntu:22.04
           - fedora:42
           - archlinux:latest
+          - opensuse/tumbleweed:latest
     container: ${{ matrix.distro }}
     steps:
       - name: Checkout repository
@@ -23,10 +24,8 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: "Install Ansible"
-        uses: alex-oleshkevich/setup-ansible@VERSION
-        with:
-          version: "9.3.0"
+      - name: Install Ansible
+        run: ./scripts/install-ansible.sh
 
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v3
