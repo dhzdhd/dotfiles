@@ -4,19 +4,19 @@ set -euo pipefail
 
 setup_ubuntu() {
     apt-get update
-    apt-get install -y python3 python3-pip python3-venv
+    apt-get install -y python3 python3-pip python3-venv pipx
 }
 
 setup_fedora() {
-    dnf install -y python3 python3-pip
+    dnf install -y python3 python3-pip pipx
 }
 
 setup_arch() {
-    pacman -Sy --noconfirm python python-pip
+    pacman -Sy --noconfirm python python-pip python-pipx
 }
 
 setup_opensuse() {
-    zypper --non-interactive install python3 python3-pip
+    zypper --non-interactive install python3 python3-pip python-pipx
 }
 
 install_python() {
@@ -39,11 +39,7 @@ install_python() {
 
 install_ansible() {
     echo "Installing Ansible..."
-    python3 -m pip install --upgrade pip setuptools wheel
-    python3 -m pip install ansible ansible-core
-    
-    echo "Installing Ansible collections..."
-    ansible-galaxy collection install community.general ansible.posix
+    pipx install --include-deps ansible
 }
 
 verify_installation() {
