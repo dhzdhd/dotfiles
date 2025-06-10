@@ -5,19 +5,23 @@ set -euo pipefail
 setup_ubuntu() {
     apt-get update
     apt-get install -y python3 python3-pip python3-venv pipx
+    pipx ensurepath
 }
 
 setup_fedora() {
     dnf install -y python3 python3-pip pipx
+    pipx ensurepath
 }
 
 setup_arch() {
     pacman -Sy --noconfirm python python-pip python-pipx
+    pipx ensurepath
 }
 
 setup_opensuse() {
     zypper refresh
     zypper --non-interactive install python313 python313-pip python313-pipx
+    pipx ensurepath
 }
 
 install_python() {
@@ -41,6 +45,7 @@ install_python() {
 install_ansible() {
     echo "Installing Ansible..."
     pipx install --include-deps ansible
+    pipx ensure path
 }
 
 verify_installation() {
