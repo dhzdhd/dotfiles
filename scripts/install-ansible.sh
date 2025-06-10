@@ -2,46 +2,52 @@
 
 set -euo pipefail
 
-echo "🔍 Detecting operating system..."
+setup_ubuntu() {
+    apt-get update
+    apt-get install -y python3 python3-pip python3-venv
+}
 
-# Function to install Python and pip
+setup_fedora() {
+    dnf install -y python3 python3-pip
+}
+
+setup_arch() {
+    pacman -Sy --noconfirm python python-pip
+}
+
+setup_opensuse() {
+    zypper --non-interactive install python3 python3-pip
+}
+
 install_python() {
+    echo "Installing Python"
+
     if command -v apt-get >/dev/null 2>&1; then
-        echo "📦 Installing Python on Ubuntu/Debian..."
-        apt-get update
-        apt-get install -y python3 python3-pip python3-venv
+        setup_ubuntu
     elif command -v dnf >/dev/null 2>&1; then
-        echo "📦 Installing Python on Fedora/RHEL..."
-        dnf install -y python3 python3-pip
+        setup_fedora
     elif command -v pacman >/dev/null 2>&1; then
-        echo "📦 Installing Python on Arch Linux..."
-        pacman -Sy --noconfirm python python-pip
+        setup_arch
     elif command -v zypper >/dev/null 2>&1; then
-        echo "📦 Installing Python on openSUSE..."
-        zypper --non-interactive install python3 python3-pip
-    elif command -v apk >/dev/null 2>&1; then
-        echo "📦 Installing Python on Alpine..."
-        apk add --no-cache python3 py3-pip
+        setup_opensuse
     else
-        echo "❌ Unsupported distribution"
+        echo "Unsupported distribution"
         cat /etc/os-release 2>/dev/null || echo "Cannot determine OS"
         exit 1
     fi
 }
 
-# Function to install Ansible
 install_ansible() {
-    echo "🚀 Installing Ansible..."
+    echo "Installing Ansible..."
     python3 -m pip install --upgrade pip setuptools wheel
     python3 -m pip install ansible ansible-core
     
-    echo "📋 Installing Ansible collections..."
+    echo "Installing Ansible collections..."
     ansible-galaxy collection install community.general ansible.posix
 }
 
-# Function to verify installation
 verify_installation() {
-    echo "✅ Verifying installation..."
+    echo "Verifying installation..."
     echo "Python version: $(python3 --version)"
     echo "Pip version: $(python3 -m pip --version)"
     echo "Ansible version: $(ansible --version | head -1)"
@@ -51,11 +57,11 @@ verify_installation() {
 
 # Main execution
 main() {
-    echo "🎯 Starting Ansible installation..."
+    echo "Starting Ansible installation..."
     install_python
     install_ansible
     verify_installation
-    echo "🎉 Ansible installation completed successfully!"
+    echo "Ansible installation completed successfully!"
 }
 
 main "$@"

@@ -10,10 +10,10 @@ jobs:
     strategy:
       matrix:
         distro:
-          - ubuntu:22.04
+          - ubuntu:24.04
           - fedora:42
           - archlinux:latest
-          # - opensuse/tumbleweed:latest
+          - opensuse/tumbleweed:latest
     container: ${{ matrix.distro }}
     steps:
       - name: Checkout repository
