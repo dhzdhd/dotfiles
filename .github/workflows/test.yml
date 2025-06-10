@@ -24,7 +24,7 @@ jobs:
           python-version: "3.13"
 
       - name: "Install Ansible"
-        uses: alex-oleshkevich/setup-ansible@v1
+        uses: alex-oleshkevich/setup-ansible@VERSION
         with:
           version: "9.3.0"
 
