@@ -46,6 +46,8 @@ install_ansible() {
     echo "Installing Ansible..."
     pipx install --include-deps ansible
     pipx ensurepath
+
+    export PATH="$HOME/.local/bin:$PATH"
 }
 
 verify_installation() {
@@ -57,7 +59,12 @@ verify_installation() {
     ansible-galaxy collection list | head -10
 }
 
-# Main execution
+run_playbook() {
+    echo "Running Ansible playbook..."
+    # Install all reqs
+    ansible-playbook ./ansible/playbooks/main.yml --extra-vars DOTFILE_INSTALL_ALL=true
+}
+
 main() {
     echo "Starting Ansible installation..."
     install_python
