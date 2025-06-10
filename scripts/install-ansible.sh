@@ -17,7 +17,9 @@ setup_arch() {
 
 setup_opensuse() {
     zypper refresh
-    zypper --non-interactive install python3 python3-pip python-pipx
+    zypper --non-interactive install python313 python313-pip
+    python3.13 -m pip install --user pipx
+    python3.13 -m pipx ensurepath
 }
 
 install_python() {
