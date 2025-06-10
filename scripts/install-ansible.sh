@@ -45,7 +45,7 @@ install_python() {
 install_ansible() {
     echo "Installing Ansible..."
     pipx install --include-deps ansible
-    pipx ensure path
+    pipx ensurepath
 }
 
 verify_installation() {
