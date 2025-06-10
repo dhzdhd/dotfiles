@@ -55,8 +55,6 @@ verify_installation() {
     echo "Python version: $(python3 --version)"
     echo "Pip version: $(python3 -m pip --version)"
     echo "Ansible version: $(ansible --version | head -1)"
-    echo "Available collections:"
-    ansible-galaxy collection list | head -10
 }
 
 run_playbook() {
@@ -70,6 +68,7 @@ main() {
     install_python
     install_ansible
     verify_installation
+    run_playbook
     echo "Ansible installation completed successfully!"
 }
 
