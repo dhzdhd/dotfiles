@@ -13,7 +13,7 @@
 
   tasks:
     - name: Prompt user
-      when: lookup('env', 'DOTFILE_INSTALL_ALL') | default('false') != 'true'
+      when: lookup('env', 'DOTFILE_INSTALL_ALL') | default('false') == 'true'
       block:
         - name: Select shell
           ansible.builtin.pause:
