@@ -7,19 +7,20 @@
     # - name: Install community.general collection
     #   ansible.builtin.collection: ansible-galaxy collection install community.general
 
-    - name: Provide operational instructions 
-      ansible.builtin.debug: 
+    - name: Provide operational instructions
+      ansible.builtin.debug:
         msg: Following are a set of questions to help you set up your environment. Select only the first letter from the option. Options can be combined.
 
   tasks:
-    - name: Prompt user 
-      block: 
+    - name: Prompt user
+      when: lookup('env', 'DOTFILE_INSTALL_ALL') | default('false') != 'true'
+      block:
         - name: Select editor
           ansible.builtin.pause:
             prompt: |
               Choose your editor:
               1) helix - Helix
-              2) nvim - Neovim  
+              2) nvim - Neovim
               3) emacs - Emacs
               4) intellij - IntelliJ IDEA
               5) vscode - Visual Studio Code
@@ -49,7 +50,7 @@
               18) scala - Scala
               19) elm - Elm
               20) ocaml - OCaml
-              30) apl - APL 
+              30) apl - APL
               31) zig - Zig
               32) nim - Nim
               33) crystal - Crystal
@@ -74,5 +75,3 @@
           loop:
             - "../tasks/editor.yml"
             - "../tasks/sdk.yml"
-      when: lookup('env', 'DOTFILE_INSTALL_ALL') | default('false') != 'true'
-      

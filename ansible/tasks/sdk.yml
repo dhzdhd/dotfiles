@@ -1,6 +1,6 @@
 ---
 - name: Set variable
-  set_fact:
+  ansible.builtin.set_fact:
     install_all: "{{ lookup('env', 'DOTFILE_INSTALL_ALL') | default('false') == 'true' }}"
 
 - name: Debug install_all variable
@@ -8,22 +8,24 @@
     msg: "SDK {{ install_all }}"
 
 - name: Setup PHP
+  become: true
+  when: ('php' in sdk.user_input) or install_all
   block:
     - name: Install Tomcat server
       ansible.builtin.include_role:
         name: geerlingguy.php
-  become: true
-  when: ('php' in sdk.user_input) or install_all
 
 - name: Setup Python
+  when: ('py' in sdk.user_input) or install_all
   block:
     - name: Install Python 3
       ansible.builtin.package:
-        name: "{{ item }}"
+        name: "{{ py_item }}"
         state: present
       loop:
         - python3
         - python3-pip
         - pyrefly
         - uv
-  when: ('py' in sdk.user_input) or install_all
+      loop_control:
+        loop_var: py_item
