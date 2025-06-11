@@ -15,6 +15,16 @@
     - name: Prompt user
       when: lookup('env', 'DOTFILE_INSTALL_ALL') | default('false') != 'true'
       block:
+        - name: Select shell
+          ansible.builtin.pause:
+            prompt: |
+              Choose your shell:
+              1) bash - Bash
+              2) zsh - Zsh
+              3) fish - Fish
+              4) nushell - Nushell
+          register: shell
+
         - name: Select editor
           ansible.builtin.pause:
             prompt: |

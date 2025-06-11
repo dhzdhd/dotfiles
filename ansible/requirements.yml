@@ -1,0 +1,9 @@
+roles:
+  - name: geerlingguy.docker
+    version: master
+  - name: geerlingguy.kubernetes
+    version: master
+  - name: xanmanning.k3s
+    version: master
+  - name: bodsch.k0s
+    version: master

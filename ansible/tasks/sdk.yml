@@ -29,3 +29,11 @@
         - uv
       loop_control:
         loop_var: py_item
+
+    - name: Test installation
+      changed_when: false
+      ansible.builtin.command: |
+        python3 --version
+        pip3 --version
+        pyrefly --version
+        uv --version
