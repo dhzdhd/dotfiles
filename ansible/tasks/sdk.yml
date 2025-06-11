@@ -11,9 +11,12 @@
   become: true
   when: ('php' in sdk.user_input) or install_all
   block:
-    - name: Install Tomcat server
+    - name: Install PHP
       ansible.builtin.include_role:
         name: geerlingguy.php
+    - name: Install Composer
+      ansible.builtin.include_role:
+        name: geerlingguy.composer
 
 - name: Setup Python
   when: ('py' in sdk.user_input) or install_all

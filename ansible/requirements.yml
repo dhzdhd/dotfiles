@@ -3,6 +3,10 @@ roles:
     version: master
   - name: geerlingguy.kubernetes
     version: master
+  - name: geerlingguy.composer
+    version: master
+  - name: geerlingguy.php
+    version: master
   - name: xanmanning.k3s
     version: master
   - name: bodsch.k0s
