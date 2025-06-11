@@ -59,6 +59,7 @@ verify_installation() {
 
 run_playbook() {
     echo "Running Ansible playbook..."
+    export DOTFILE_INSTALL_ALL=true
     # Install all reqs
     ansible-playbook ./ansible/playbooks/main.yml --extra-vars DOTFILE_INSTALL_ALL=true
 }
